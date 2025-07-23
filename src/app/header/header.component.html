@@ -1,0 +1,24 @@
+<div id="header">
+    <div id="header-left">
+        <button class="burger" (click)="toggleSidebar()">&#9776;</button>
+        <div id="logo"></div>
+    </div>
+
+
+
+    <div id="header-right">
+       
+        <button class="BoutonHeaderRight" id="BoutonReservation"><mat-icon>directions_car</mat-icon><span class="TextButton">Mes réservations</span></button> 
+        <button id="BoutonLanguage"><span>FR|</span><mat-icon>language</mat-icon></button>
+        <button class="BoutonHeaderRight" id="BoutonLogin"><mat-icon>account_circle</mat-icon><span class="TextButton">Connexion|Inscription</span></button>
+    </div>
+
+    <div class="sidebar" [class.open]="sidebarOpen">
+        <a href="javascript:void(0)" class="closebtn" (click)="toggleSidebar()">&times;</a>
+        <a routerLink="/" (click)="toggleSidebar()">Accueil</a>
+        <a routerLink="/voitures" (click)="toggleSidebar()">Voitures</a>
+        <a routerLink="/reservations" (click)="toggleSidebar()">Réservations</a>
+        <a routerLink="/contact" (click)="toggleSidebar()">Contact</a>
+      </div>
+      <div class="sidebar-overlay" *ngIf="sidebarOpen" (click)="toggleSidebar()"></div>
+</div>

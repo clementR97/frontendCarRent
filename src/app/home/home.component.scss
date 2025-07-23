@@ -1,0 +1,189 @@
+#Partie1{
+    border: solid green;
+    display: flex;
+    flex-direction: column ;
+    align-items: center;
+}
+#ImgPartie1{
+    width: 80%;
+    
+    height: 370px;
+    background-image: url('/assets/imgPartie1modifier.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+}
+#Partie2{
+    border: solid blue;
+    display: flex;
+    justify-content: space-around;
+}
+.Partie2Lot{
+    width: 30%;
+    height: 80px;
+    border: solid orange;
+}
+.IconText{
+    display: flex;
+    align-items: center;
+}
+.Partie2Text{
+    font-size: 22px;
+}
+#Partie3{
+    width: 100%;
+    min-height: 300px;
+    border: solid pink;
+    display: flex;
+    flex-direction: column;
+}
+.Partie3Lot{
+    width: 100%;
+    height: 400px;
+    border: solid black;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+    align-items: center;
+}
+.rectangle{
+    width: 30%;
+    height: 20em;
+    border: solid red;
+    border-radius: 30px;
+    display: flex;
+    align-items:flex-end
+}
+.Banderole{
+    width: 100%;
+    height: 70px;
+    border: solid black;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    background-color: #ffffff;
+    opacity: 0.5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 27px;
+    
+}
+
+#Partie3Rectangle1{
+    background-image: url('/assets/bmw_arriere.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+#Partie3Rectangle1::before {
+    content: "-10%";
+    position: absolute;
+    top: 15px;           /* Position depuis le haut */
+    right: 15px;         /* Position depuis la droite */
+    
+    /* Style du cercle */
+    width: 50px;
+    height: 50px;
+    background-color: #e74c3c;  /* Rouge pour une promo */
+    border-radius: 50%;         /* Cercle parfait */
+    
+    /* Centrage du texte */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* Style du texte */
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    
+    /* Ombre pour effet 3D */
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+    
+    /* Animation optionnelle */
+    transform: scale(1);
+    transition: transform 0.2s ease;
+}
+
+#Partie3Rectangle2{
+    background-image: url('/assets/lamborgini_profile.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+#Partie3Rectangle2::before {
+    content: " 62€/j";
+    position: absolute;
+    top: 15px;           /* Position depuis le haut */
+    right: 15px;         /* Position depuis la droite */
+    
+    /* Style du cercle */
+    width: 50px;
+    height: 50px;
+    background-color: #e74c3c;  /* Rouge pour une promo */
+    border-radius: 50%;         /* Cercle parfait */
+    
+    /* Centrage du texte */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* Style du texte */
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    
+    /* Ombre pour effet 3D */
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+    
+    /* Animation optionnelle */
+    transform: scale(1);
+    transition: transform 0.2s ease;
+}
+
+#Partie3Rectangle3{
+    background-image: url('/assets/demenagement.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+#Partie3Rectangle4{
+    background-image: url('/assets/audi_vert.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+@media (max-width: 900px) {
+    #ImgPartie1{
+        width: 70%;
+        height: 200px;
+        background-size: contain;
+
+    }
+    #Partie2{
+        flex-direction: column;
+        align-items: center;
+       
+    }
+    .Partie2Lot{
+        width: 70%;
+        margin-bottom: 30px;
+    }
+    .Partie2Text{
+        font-size: 18px;
+    }
+    .IconText{
+        font-size: 12px;
+    }
+    
+    .Partie3Lot{
+        flex-direction: column;
+    }
+    .rectangle{
+        margin-bottom: 20px;
+        width: 70%;
+        height: 1000px;
+    }
+}

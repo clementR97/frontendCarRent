@@ -1,0 +1,147 @@
+#header{
+    width: 100%;
+    display: flex;
+    border:solid #1976d2;
+}
+#header-left{
+    border: solid green;
+    width: 70%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+
+}
+#logo{
+    width: 60px;
+    height: 60px;
+    background-image: url('/assets/logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    border: solid;
+}
+#header-right{
+    border: solid red;
+    width: 40%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    
+}
+.BoutonHeaderRight{
+    display: flex;
+    align-items: center;
+    border-radius: 30px;
+    border: none;
+    width: 170px;
+    margin-right: 20px;
+    cursor: pointer;
+}
+#BoutonReservation{
+    background-color: #90CAF9;
+}
+#BoutonLogin{
+    background-color: #ffffff;
+    border: solid;
+}
+#BoutonLanguage{
+    border: none;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 20px;
+}
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #1976d2;
+    color: #0a0909;
+    padding: 0 1rem;
+    height: 64px;
+    position: relative;
+  }
+  
+  .burger {
+    font-size: 2rem;
+    background: none;
+    border: none;
+    color: #0d0b0b;
+    cursor: pointer;
+    margin-right: 1rem;
+    display: block;
+  }
+  
+  .logo {
+    height: 40px;
+  }
+  
+  .navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  /* Sidebar */
+  .sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 2000;
+    top: 0;
+    left: 0;
+    background-color: #222;
+    overflow-x: hidden;
+    transition: 0.3s;
+    padding-top: 64px; /* hauteur de la navbar */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .sidebar.open {
+    width: 250px;
+  }
+  
+  .sidebar a {
+    padding: 16px 24px;
+    text-decoration: none;
+    color: #ffffff;
+    display: block;
+    transition: 0.2s;
+  }
+  
+  .sidebar a:hover {
+    background: #1976d2;
+  }
+  
+  .closebtn {
+    position: absolute;
+    top: 16px;
+    right: 24px;
+    font-size: 2rem;
+    color: #030202;
+    cursor: pointer;
+  }
+  
+  /* Overlay */
+  .sidebar-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.3);
+    z-index: 1500;
+  }
+  
+  /* Responsive : cacher la navbar-right sur mobile */
+  @media (max-width: 900px) {
+    .navbar-right {
+      display: none;
+    }
+    .TextButton{
+        display: none;
+    }
+    .BoutonHeaderRight{
+        width: 45px;
+        height: 45px;
+        justify-content: center;
+    }
+  }
