@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -30,11 +30,17 @@ export const MY_DATE_FORMATS = {
   ]
 })
 export class ReservationBarComponent {
+  @ViewChild('timePicker') timePicker!: TimePickerComponent;
+  @ViewChild('returnTimePicker') returnTimePicker!: TimePickerComponent;
+  @ViewChild('departurePicker') departurePicker: any;
+  @ViewChild('returnPicker') returnPicker: any;
+  
   departureDate: Date | null = null;
   departureTime = '';
   returnDate: Date | null = null;
   returnTime = '';
   selectedTime = '';
+  selectedReturnTime = '';
 
   onDepartureChange() {
     console.log('Départ:', this.departureDate, this.departureTime);
@@ -46,6 +52,28 @@ export class ReservationBarComponent {
 
   onTimeSelected(time: string) {
     this.selectedTime = time;
+  }
+
+  onReturnTimeSelected(time: string) {
+    this.selectedReturnTime = time;
+  }
+
+  openDepartureTimePicker() {
+    this.timePicker.modalTitle = 'Sélectionnez l\'heure de départ';
+    this.timePicker.open();
+  }
+
+  openReturnTimePicker() {
+    this.returnTimePicker.modalTitle = 'Sélectionnez l\'heure de retour';
+    this.returnTimePicker.open();
+  }
+
+  openDepartureDatePicker() {
+    this.departurePicker.open();
+  }
+
+  openReturnDatePicker() {
+    this.returnPicker.open();
   }
 
   // Empêcher les dates passées

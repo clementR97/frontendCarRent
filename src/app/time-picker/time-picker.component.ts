@@ -14,6 +14,7 @@ export class TimePickerComponent {
   
   isOpen = false;
   selectedTime = '';
+  modalTitle = 'Sélectionnez l\'heure de prise en charge';
   
   morningTimes = ['07:00', '07:30'];
   afternoonTimes = ['08:00', '08:30', '09:00', '09:30', '10:00', '10:30', 

@@ -35,14 +35,14 @@
                       <label>Date Départ</label>
                       <div class="date-time-container">
                         <mat-form-field appearance="outline">
-                          <input matInput [matDatepicker]="departurePicker" placeholder="06/07" readonly>
+                          <input matInput [matDatepicker]="departurePicker" placeholder="06/07" readonly (click)="openDepartureDatePicker()" [matDatepickerFilter]="dateFilter">
                           <mat-datepicker-toggle matSuffix [for]="departurePicker"></mat-datepicker-toggle>
                           <mat-datepicker #departurePicker></mat-datepicker>
                         </mat-form-field>
                         
                         <mat-form-field appearance="outline">
-                          <input matInput [value]="selectedTime" placeholder="13:00" readonly (click)="timePicker.open()">
-                          <mat-icon matSuffix (click)="timePicker.open()">schedule</mat-icon>
+                          <input matInput [value]="selectedTime" placeholder="13:00" readonly (click)="openDepartureTimePicker()">
+                          <mat-icon matSuffix (click)="openDepartureTimePicker()">schedule</mat-icon>
                         </mat-form-field>
                       </div>
                     </div>
@@ -51,14 +51,14 @@
                       <label>Date Retour</label>
                       <div class="date-time-container">
                         <mat-form-field appearance="outline">
-                          <input matInput [matDatepicker]="returnPicker" placeholder="06/09" readonly>
+                          <input matInput [matDatepicker]="returnPicker" placeholder="06/09" readonly (click)="openReturnDatePicker()" [matDatepickerFilter]="returnDateFilter">
                           <mat-datepicker-toggle matSuffix [for]="returnPicker"></mat-datepicker-toggle>
                           <mat-datepicker #returnPicker></mat-datepicker>
                         </mat-form-field>
                         
                         <mat-form-field appearance="outline">
-                          <input matInput type="time" placeholder="11:25">
-                          <mat-icon matSuffix>schedule</mat-icon>
+                          <input matInput [value]="selectedReturnTime" placeholder="11:25" readonly (click)="openReturnTimePicker()">
+                          <mat-icon matSuffix (click)="openReturnTimePicker()">schedule</mat-icon>
                         </mat-form-field>
                       </div>
                     </div>
@@ -72,4 +72,5 @@
 
 <!-- Ajouter le time picker à la fin -->
 <app-time-picker #timePicker (timeSelected)="onTimeSelected($event)"></app-time-picker>
+<app-time-picker #returnTimePicker (timeSelected)="onReturnTimeSelected($event)"></app-time-picker>
 

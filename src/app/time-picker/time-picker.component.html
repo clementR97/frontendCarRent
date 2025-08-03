@@ -1,7 +1,7 @@
 <div class="time-picker-overlay" *ngIf="isOpen" (click)="close()"></div>
 <div class="time-picker-modal" *ngIf="isOpen">
   <div class="time-picker-header">
-    <h3>Sélectionnez l'heure de prise en charge</h3>
+    <h3>{{ modalTitle }}</h3>
     <button class="close-btn" (click)="close()">×</button>
   </div>
   
