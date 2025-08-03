@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatIcon } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
+import { ReservationBarComponent } from '../reservation-bar/reservation-bar.component';
 @Component({
   selector: 'app-home',
-  imports: [CommonModule,MatIcon],
+  imports: [CommonModule,MatIconModule,ReservationBarComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

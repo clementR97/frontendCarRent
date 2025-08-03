@@ -1,0 +1,278 @@
+#reservation-bar{
+    width: 99%;
+    height: 250px;
+    border: solid red;
+    border-radius: 30px;
+    position: fixed;
+    opacity: 0.9;
+    background-color: pink;
+    bottom: 10px;
+    left: 5px;
+    margin-left: 1px;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    
+}
+#BoutonReservation-bar{
+    width: 350px;
+    height: 60px;
+    border: solid green;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.BoutonReservation-barParam{
+    display: flex;
+    align-items: center;
+    width: 100px;
+    justify-content: space-between;
+    border: none;
+    border-radius: 40px;
+    background-color: #1565C0;
+    color: white;
+    cursor: pointer;
+}
+#SaisirReservation-bar{
+    width: 99%;
+    height: 100px;
+    border: solid blue;
+    margin-left: 5px;
+    display: flex;
+
+}
+#LocalisationReservation-bar{
+    width: 50%;
+    height: 90px;
+    border: solid green;
+    display: flex;
+    align-items: center;
+}
+#SearchReservation-bar{
+    width: 170px;
+    height: 80px;
+    border: solid purple;
+    display: flex;
+    flex-direction: column;
+}
+.input-container {
+    margin-top: 10px;
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  .input-icon {
+    position: absolute;
+    left: 12px;
+    color: #666;
+    font-size: 20px;
+    pointer-events: none; // pour que l'icône ne bloque pas le clic
+  }
+#InputReservation-bar{
+    width: 100px;
+    height: 10px;
+    border-radius: 30px;
+    padding-left: 40px; // espace pour l'icône
+    padding-right: 12px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border:solid #1565C0;
+    color: #1565C0;
+}
+#InputReservation-bar ::placeholder{
+    color: #1565C0;
+}
+#InputReservation-bar ::focus{
+    outline: none;
+}
+#NewPlaceReservation-bar{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+}
+#DateReservation-bar{
+    width: 50%;
+    height: 90px;
+    border: solid black;
+}
+.DateDepart{
+    width: 40%;
+    height: 99%;
+    border: solid red;
+    display: flex;
+    flex-direction: column;
+}
+.DateDepart input[type="date"]{
+    width: 120px;
+    height: 60%;
+    font-size: 19px;
+}
+// partie teste
+.date-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 16px;
+    background: #f5f5f5;
+    border-radius: 8px;
+  }
+  
+  .date-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .date-group label {
+    font-weight: bold;
+    color: #333;
+    font-size: 14px;
+  }
+  
+  mat-form-field {
+    width: 150px;
+  }
+  
+  // Personnaliser le calendrier Material
+  ::ng-deep .mat-calendar {
+    background: white;
+    
+    // En-tête du calendrier (mois/année)
+    .mat-calendar-header {
+      background: white;
+      color: #1976d2;
+    }
+    
+    // Boutons de navigation (flèches)
+    .mat-calendar-controls {
+      .mat-calendar-previous-button,
+      .mat-calendar-next-button {
+        color: #1976d2;
+      }
+    }
+    
+    // Corps du calendrier
+    .mat-calendar-body {
+      background: white;
+      
+      // Cellules des jours
+      .mat-calendar-body-cell {
+        color: #1976d2;
+        
+        // Jour sélectionné
+        &.mat-calendar-body-selected {
+          background-color: #1976d2;
+          color: white;
+        }
+        
+        // Jour actuel
+        &.mat-calendar-body-today {
+          border-color: #1976d2;
+          color: #1976d2;
+        }
+        
+        // Jours du mois précédent/suivant
+        &.mat-calendar-body-disabled {
+          color: #ccc;
+        }
+      }
+      
+      // En-têtes des jours de la semaine
+      .mat-calendar-body-label {
+        color: #1976d2;
+        font-weight: bold;
+      }
+    }
+    
+    // Bouton de validation
+    .mat-calendar-actions {
+      .mat-button {
+        color: #1976d2;
+      }
+    }
+  }
+  
+  // Personnaliser les inputs de date
+  mat-form-field {
+    .mat-mdc-form-field-flex {
+      background: white;
+    }
+    
+    .mat-mdc-text-field-wrapper {
+      border-radius: 6px;
+    }
+    
+    .mat-mdc-form-field-focus-overlay {
+      background: white;
+    }
+  }
+  
+  .search-btn {
+    background: #1976d2;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 24px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .search-btn:hover {
+    background: #1565c0;
+  }
+
+.date-time-container {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+mat-form-field {
+  width: 120px;
+}
+
+// Personnaliser le sélecteur d'heure
+::ng-deep input[type="time"] {
+  color: #1976d2;
+  font-size: 14px;
+}
+
+// Style pour l'icône d'heure
+mat-icon {
+  color: #666;
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .date-section {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .date-time-container {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+// Style pour les inputs en lecture seule
+mat-form-field input[readonly] {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+mat-form-field input[readonly]:focus {
+  background-color: white;
+}
+
+// Style pour indiquer que c'est cliquable
+mat-form-field input[readonly]:hover {
+  background-color: #f0f0f0;
+}

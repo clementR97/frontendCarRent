@@ -1,0 +1,38 @@
+<div class="time-picker-overlay" *ngIf="isOpen" (click)="close()"></div>
+<div class="time-picker-modal" *ngIf="isOpen">
+  <div class="time-picker-header">
+    <h3>Sélectionnez l'heure de prise en charge</h3>
+    <button class="close-btn" (click)="close()">×</button>
+  </div>
+  
+  <div class="opening-hours">
+    <mat-icon>schedule</mat-icon>
+    <span>Horaires d'ouverture: 07:00 - 23:00</span>
+  </div>
+  
+  <div class="time-sections">
+    <div class="time-section">
+      <h4>Début de matinée</h4>
+      <div class="time-grid">
+        <button class="time-slot" 
+                *ngFor="let time of morningTimes" 
+                [class.selected]="selectedTime === time"
+                (click)="selectTime(time)">
+          {{ time }}
+        </button>
+      </div>
+    </div>
+    
+    <div class="time-section">
+      <h4>Matin - après-midi</h4>
+      <div class="time-grid">
+        <button class="time-slot" 
+                *ngFor="let time of afternoonTimes" 
+                [class.selected]="selectedTime === time"
+                (click)="selectTime(time)">
+          {{ time }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

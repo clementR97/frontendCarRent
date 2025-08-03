@@ -1,1 +1,75 @@
-<p>reservation-bar works!</p>
+<div id="reservation-bar">
+
+<div id="BoutonReservation-bar">
+     <button class="BoutonReservation-barParam"><mat-icon>directions_car</mat-icon><span>Voitures</span></button>
+     <button class="BoutonReservation-barParam"><mat-icon>local_shipping</mat-icon><span>Utilitaires</span></button>
+     <button class="BoutonReservation-barParam"><mat-icon>add</mat-icon><span>Abonnement</span></button>
+</div>
+            <div id="SaisirReservation-bar">
+                           <!-- partie pour saisir une adresse pour récuperrer et déposer le véhicule -->
+                <div id="LocalisationReservation-bar">
+                    <div id="SearchReservation-bar">
+                        <span>Retrait et retour</span>
+                            <div class="input-container">
+                            <input id="InputReservation-bar" type="text" placeholder=" Aéroport,Ville"/>
+                            <mat-icon class="input-icon">search</mat-icon>
+                            </div>
+                       
+                    </div>
+                    <span id="NewPlaceReservation-bar"><mat-icon>add</mat-icon>Lieu de retour Différent</span>
+                </div>
+                 <!-- fin partie localisation -->
+
+                   <!-- partie pour saisir une date de début et fin ainsi que le bouton valider -->
+                  <!-- <div id="DateReservation-bar">
+                    <div class="DateDepart">
+                        <span>Date de Départ</span>
+                        <input type="date" name="Date Depart" />
+                    </div>
+
+                    <div class="DateRetour"></div>
+                  </div>
+                  -->
+                  <div class="date-section">
+                    <div class="date-group">
+                      <label>Date Départ</label>
+                      <div class="date-time-container">
+                        <mat-form-field appearance="outline">
+                          <input matInput [matDatepicker]="departurePicker" placeholder="06/07" readonly>
+                          <mat-datepicker-toggle matSuffix [for]="departurePicker"></mat-datepicker-toggle>
+                          <mat-datepicker #departurePicker></mat-datepicker>
+                        </mat-form-field>
+                        
+                        <mat-form-field appearance="outline">
+                          <input matInput [value]="selectedTime" placeholder="13:00" readonly (click)="timePicker.open()">
+                          <mat-icon matSuffix (click)="timePicker.open()">schedule</mat-icon>
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                    <div class="date-group">
+                      <label>Date Retour</label>
+                      <div class="date-time-container">
+                        <mat-form-field appearance="outline">
+                          <input matInput [matDatepicker]="returnPicker" placeholder="06/09" readonly>
+                          <mat-datepicker-toggle matSuffix [for]="returnPicker"></mat-datepicker-toggle>
+                          <mat-datepicker #returnPicker></mat-datepicker>
+                        </mat-form-field>
+                        
+                        <mat-form-field appearance="outline">
+                          <input matInput type="time" placeholder="11:25">
+                          <mat-icon matSuffix>schedule</mat-icon>
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                    <button class="search-btn">Voir les Véhicules</button>
+                  </div>
+
+            </div>
+      
+</div>
+
+<!-- Ajouter le time picker à la fin -->
+<app-time-picker #timePicker (timeSelected)="onTimeSelected($event)"></app-time-picker>
+
