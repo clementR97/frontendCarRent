@@ -157,7 +157,8 @@
 }
 #Partie4{
     width: 100%;
-    min-height: 400px;
+    // min-height: 400px;
+    max-height: 950px;
     border: solid purple;
     display: flex;
     flex-direction: column;
@@ -165,12 +166,17 @@
 }
 #Partie4Vehicules{
     width: 100%;
+    max-width: 1200px;
     height: 500px;
     border: solid goldenrod;
     display: flex;
     justify-content: space-around;
+    flex-wrap:wrap;
+    gap: 20px;
 }
 .Vehicules{
+    flex:1;
+    // min-width: 400px;
     width: 490px;
     height: 400px;
     border: solid;
@@ -180,17 +186,16 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 #ImgVehicule{
     background-image: url('/assets/peugeot_208_profile.png');
-    background-repeat: no-repeat;
-    background-size: cover;
+    
 }
 #ImgVehicule2{
     background-image: url('/assets/renaultR5.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    zoom: 1;
+    
 }
 .BandeDuHaut{
     width: 100%;
@@ -268,7 +273,7 @@
     opacity: 0.6;
     
 }
-@media (max-width: 900px) {
+@media (max-width: 768px) {
     #ImgPartie1{
         width: 70%;
         height: 200px;
@@ -298,5 +303,30 @@
         margin-bottom: 20px;
         width: 70%;
         height: 1000px;
+    }
+    #Partie4Vehicules{
+       flex-direction: column;
+        
+        gap: 30px;
+        align-items: center;
+    }
+    
+    .Vehicules{
+        width: 300px;
+        height: 300px;
+    }
+    .BandeDuHaut{
+        font-size: 15px;
+    }
+    #Transmission{
+        width: 30px;
+        height: 30px;
+        
+    }
+    .TypeTransmissionReservoire{
+        font-size: 10px;
+    }
+    #Reservoire{
+        display: none;
     }
 }
