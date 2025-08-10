@@ -1,0 +1,39 @@
+<div class="calendar-overlay" *ngIf="isOpen" (click)="close()"></div>
+    <div class="calendar-modal" *ngIf="isOpen">
+      <div class="calendar-header">
+        <button class="nav-button" (click)="previousMonth()">
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+        <h3>{{ getMonthYearLabel() }}</h3>
+        <button class="nav-button" (click)="nextMonth()">
+          <mat-icon>chevron_right</mat-icon>
+        </button>
+      </div>
+      
+      <div class="calendar-content">
+        <div class="weekdays">
+          <div class="weekday" *ngFor="let day of weekDays">{{ day }}</div>
+        </div>
+        
+        <div class="calendar-grid">
+          <button 
+            *ngFor="let day of calendarDays" 
+            class="day-button"
+            [class.other-month]="!day.isCurrentMonth"
+            [class.today]="day.isToday"
+            [class.selected]="day.isSelected"
+            [class.disabled]="day.isDisabled"
+            [disabled]="day.isDisabled"
+            (click)="selectDate(day)">
+            {{ day.day }}
+          </button>
+        </div>
+      </div>
+      
+      <div class="calendar-footer">
+        <button class="cancel-btn" (click)="close()">Annuler</button>
+        <button class="confirm-btn" (click)="confirmSelection()" [disabled]="!selectedDate">
+          Confirmer
+        </button>
+      </div>
+    </div>

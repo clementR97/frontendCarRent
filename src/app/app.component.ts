@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from "./header/header.component";
-
-
+import { ReservationBarComponent } from "./reservation-bar/reservation-bar.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HeaderComponent],
+  standalone: true,
+  imports: [RouterOutlet, HeaderComponent, ReservationBarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

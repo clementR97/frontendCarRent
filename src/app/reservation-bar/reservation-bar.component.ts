@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -7,11 +8,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatIcon } from '@angular/material/icon';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { TimePickerComponent } from '../time-picker/time-picker.component';
+import { MobileReservationModalComponent } from '../mobile-reservation-modal/mobile-reservation-modal.component';
 
 export const MY_DATE_FORMATS = {
   parse: {
     dateInput: 'DD/MM',
-  },
+  }, 
   display: {
     dateInput: 'DD/MM',
     monthYearLabel: 'MMM YYYY',
@@ -22,7 +24,8 @@ export const MY_DATE_FORMATS = {
 
 @Component({
   selector: 'app-reservation-bar',
-  imports:[MatIcon,MatFormFieldModule, MatInputModule, MatIconModule,MatDatepickerModule, MatNativeDateModule, MatFormFieldModule, MatInputModule, MatIconModule, TimePickerComponent],
+  standalone: true,
+  imports:[CommonModule, MatIcon,MatFormFieldModule, MatInputModule, MatIconModule,MatDatepickerModule, MatNativeDateModule, MatFormFieldModule, MatInputModule, MatIconModule, TimePickerComponent, MobileReservationModalComponent],
   templateUrl: './reservation-bar.component.html',
   styleUrls: ['./reservation-bar.component.scss'],
   providers: [
@@ -35,12 +38,31 @@ export class ReservationBarComponent {
   @ViewChild('departurePicker') departurePicker: any;
   @ViewChild('returnPicker') returnPicker: any;
   
-  departureDate: Date | null = null;
+  departureDate: Date | undefined ;
   departureTime = '';
-  returnDate: Date | null = null;
+  returnDate: Date | undefined ;
   returnTime = '';
   selectedTime = '';
   selectedReturnTime = '';
+  showMobileModal = false;
+
+  openMobileModal() {
+    //console.log('Opening mobile modal');
+    this.showMobileModal = true;
+  }
+
+  closeMobileModal() {
+    this.showMobileModal = false;
+  }
+
+  confirmMobileModal(data: { departureDate: Date | null; returnDate: Date | null; departureTime: string; returnTime: string; location: string; }) {
+    this.departureDate = data.departureDate || undefined;
+    this.returnDate = data.returnDate || undefined;
+    this.selectedTime = data.departureTime;
+    this.selectedReturnTime = data.returnTime;
+    // Optionnel: gérer location si besoin
+    this.showMobileModal = false;
+  }
 
   onDepartureChange() {
     console.log('Départ:', this.departureDate, this.departureTime);

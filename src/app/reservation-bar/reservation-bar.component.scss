@@ -1,5 +1,5 @@
 #reservation-bar{
-    width: 99%;
+    width: 99.6%;
     height: 250px;
     border: solid red;
     border-radius: 30px;
@@ -7,8 +7,8 @@
     opacity: 0.9;
     background-color: pink;
     bottom: 10px;
-    left: 5px;
-    margin-left: 1px;
+    // left: 30px;
+    
     z-index: 1;
     display: flex;
     flex-direction: column;
@@ -244,9 +244,39 @@ mat-form-field {
 mat-icon {
   color: #666;
 }
-
+#Reservation-barResponsive{
+  width: 97%;
+  height: 50px;
+  border: solid #1976d2;
+  background-color: #ffffff;
+  position: fixed;
+  opacity: 0.9;
+  bottom: 6px;
+  left: 4px;
+  display: none;
+  border-radius: 30px;
+  //display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#Reservation-barResponsive button{
+  width: 100%;
+  height: 100%;
+  border-radius: 30px;
+  cursor: pointer;
+  border: none;
+  font-size: 15px;
+  color: #ffffff;
+  background-color: #1976d2;
+}
 // Responsive
 @media (max-width: 768px) {
+  #reservation-bar{
+    display: none;
+  }
+  #Reservation-barResponsive{
+    display: flex;
+  }
   .date-section {
     flex-direction: column;
     gap: 16px;

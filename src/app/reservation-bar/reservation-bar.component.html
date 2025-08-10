@@ -18,18 +18,7 @@
                     </div>
                     <span id="NewPlaceReservation-bar"><mat-icon>add</mat-icon>Lieu de retour Différent</span>
                 </div>
-                 <!-- fin partie localisation -->
-
-                   <!-- partie pour saisir une date de début et fin ainsi que le bouton valider -->
-                  <!-- <div id="DateReservation-bar">
-                    <div class="DateDepart">
-                        <span>Date de Départ</span>
-                        <input type="date" name="Date Depart" />
-                    </div>
-
-                    <div class="DateRetour"></div>
-                  </div>
-                  -->
+                 
                   <div class="date-section">
                     <div class="date-group">
                       <label>Date Départ</label>
@@ -69,8 +58,18 @@
             </div>
       
 </div>
+<!-- une barre de reservation responsive -->
+<div id="Reservation-barResponsive">
+  <button (click)="openMobileModal()">Louer Mon Véhicule</button>
+</div>
 
-<!-- Ajouter le time picker à la fin -->
+<app-mobile-reservation-modal 
+  *ngIf="showMobileModal" 
+  (closed)="closeMobileModal()" 
+  (confirm)="confirmMobileModal($event)">
+</app-mobile-reservation-modal>
+ 
+ <!-- Ajouter le time picker à la fin -->
 <app-time-picker #timePicker (timeSelected)="onTimeSelected($event)"></app-time-picker>
 <app-time-picker #returnTimePicker (timeSelected)="onReturnTimeSelected($event)"></app-time-picker>
 

@@ -1,0 +1,137 @@
+<!-- <div class="overlay" (click)="close()"></div>
+<div class="modal">
+  <div class="header">
+    <h2>Réserver un véhicule</h2>
+    <button class="close" (click)="close()">×</button>
+  </div>
+
+  <div class="content">
+    <div class="location">
+      <label>Lieu de retrait et retour</label>
+      <div class="input-container">
+        <input type="text" [(ngModel)]="location" placeholder="Aéroport, Ville" />
+        <mat-icon>search</mat-icon>
+      </div>
+    </div>
+
+    <div class="dates">
+      <div class="date-block">
+        <label>Date de départ</label>
+        <div class="row">
+          <mat-form-field appearance="outline">
+            <input matInput [matDatepicker]="depPicker" placeholder="JJ/MM" readonly (click)="depPicker.open()" [matDatepickerFilter]="dateFilter">
+            <mat-datepicker-toggle matSuffix [for]="depPicker"></mat-datepicker-toggle>
+            <mat-datepicker #depPicker></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <input matInput [value]="departureTime" placeholder="--:--" readonly (click)="depTime.open()">
+            <mat-icon matSuffix (click)="depTime.open()">schedule</mat-icon>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="date-block">
+        <label>Date de retour</label>
+        <div class="row">
+          <mat-form-field appearance="outline">
+            <input matInput [matDatepicker]="retPicker" placeholder="JJ/MM" readonly (click)="retPicker.open()" [matDatepickerFilter]="returnDateFilter">
+            <mat-datepicker-toggle matSuffix [for]="retPicker"></mat-datepicker-toggle>
+            <mat-datepicker #retPicker></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <input matInput [value]="returnTime" placeholder="--:--" readonly (click)="retTime.open()">
+            <mat-icon matSuffix (click)="retTime.open()">schedule</mat-icon>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <button class="primary" (click)="submit()">Voir les véhicules disponibles</button>
+  </div>
+
+  <app-time-picker #depTime (timeSelected)="onDepartureTimeSelected($event)"></app-time-picker>
+  <app-time-picker #retTime (timeSelected)="onReturnTimeSelected($event)"></app-time-picker>
+</div> -->
+
+
+<div class="overlay" (click)="close()"></div>
+    <div class="modal">
+      <div class="header">
+        <h2>Réserver un véhicule</h2>
+        <button class="close" (click)="close()">×</button>
+      </div>
+
+      <div class="content">
+        <div class="location">
+          <label>Lieu de retrait et retour</label>
+          <div class="input-container">
+            <input type="text" [(ngModel)]="location" placeholder="Aéroport, Ville" />
+            <mat-icon>search</mat-icon>
+          </div>
+        </div>
+
+        <div class="dates">
+          <div class="date-block">
+            <label>Date de départ</label>
+            <div class="row">
+              <div class="date-input" (click)="openDepartureDatePicker()">
+                <mat-icon>calendar_today</mat-icon>
+                <span>{{ formatDate(departureDate) || 'JJ/MM' }}</span>
+                <mat-icon>expand_more</mat-icon>
+              </div>
+
+              <div class="time-input" (click)="depTime.open()">
+                <mat-icon>schedule</mat-icon>
+                <span>{{ departureTime || '--:--' }}</span>
+                <mat-icon>expand_more</mat-icon>
+              </div>
+            </div>
+          </div>
+
+          <div class="date-block">
+            <label>Date de retour</label>
+            <div class="row">
+              <div class="date-input" (click)="openReturnDatePicker()">
+                <mat-icon>calendar_today</mat-icon>
+                <span>{{ formatDate(returnDate) || 'JJ/MM' }}</span>
+                <mat-icon>expand_more</mat-icon>
+              </div>
+
+              <div class="time-input" (click)="retTime.open()">
+                <mat-icon>schedule</mat-icon>
+                <span>{{ returnTime || '--:--' }}</span>
+                <mat-icon>expand_more</mat-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <button class="primary" (click)="submit()">Voir les véhicules disponibles</button>
+      </div>
+
+      <app-time-picker #depTime (timeSelected)="onDepartureTimeSelected($event)"></app-time-picker>
+      <app-time-picker #retTime (timeSelected)="onReturnTimeSelected($event)"></app-time-picker>
+      
+      <!-- Calendar Modals -->
+      <app-calendar-modal
+        [isOpen]="showDepartureDatePicker"
+        [minDate]="getMinDate()"
+        [filterDate]="dateFilter"
+        (closed)="closeDepartureDatePicker()"
+        (dateSelected)="onDepartureDateSelected($event)">
+      </app-calendar-modal>
+
+      <app-calendar-modal
+        [isOpen]="showReturnDatePicker"
+        [minDate]="getReturnMinDate()"
+        [filterDate]="returnDateFilter"
+        (closed)="closeReturnDatePicker()"
+        (dateSelected)="onReturnDateSelected($event)">
+      </app-calendar-modal>
+    </div>

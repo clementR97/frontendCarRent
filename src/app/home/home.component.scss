@@ -33,14 +33,14 @@
     font-size: 22px;
 }
 #Partie3{
-    width: 100%;
+    width: 99.7%;
     min-height: 300px;
     border: solid pink;
     display: flex;
     flex-direction: column;
 }
 .Partie3Lot{
-    width: 100%;
+    width: 99.6%;
     min-height: 400px;
     border: solid black;
     display: flex;
@@ -164,9 +164,9 @@
     background-position: center;
 }
 #Partie4{
-    width: 100%;
-    // min-height: 400px;
-    max-height: 950px;
+    width: 99.7%;
+    
+    min-height: 400px;
     border: solid purple;
     display: flex;
     flex-direction: column;
@@ -178,17 +178,18 @@
     height: 500px;
     border: solid goldenrod;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-wrap:wrap;
     gap: 20px;
+    padding: 20px;
 }
 .Vehicules{
     flex:1;
-    // min-width: 400px;
+     min-width: 300px;
+    max-width: 490px;
     width: 490px;
     height: 400px;
     border: solid;
-    
     border-radius: 30px;
     display: flex;
     flex-direction: column;
@@ -315,7 +316,7 @@
     }
     #Partie4Vehicules{
        flex-direction: column;
-        
+        width: 300px;
         gap: 30px;
         align-items: center;
     }
@@ -339,7 +340,7 @@
         display: none;
     }
 }
-@media(orientation: portrait) and (min-width:768px) and (max-width:1370px) {
+@media(orientation: portrait) and (min-width:769px) and (max-width:1024px) {
   .rectangle{
       width: 400px;
     
@@ -348,14 +349,37 @@
    #Partie4Vehicules {
     justify-content: center;
     gap: 15px;
-    height: 400px; /* permet de s'adapter au contenu */
+    height: auto; /* permet de s'adapter au contenu */
+    flex-wrap: wrap;
   }
 
   .Vehicules {
      width: 400px; /* au lieu de 490px */
-     height: 400px ; /* réduit légèrement la hauteur */
+     aspect-ratio: 16/10; 
+     height: auto;
     background-size: cover; /* pour que l’image ne déborde pas */
     background-position: center;
+    flex: none;
   }
 
 }
+
+@media(orientation: portrait) and (min-width:768px) and (max-width:1180px) {
+    #Partie4Vehicules{
+        flex-wrap: nowrap;
+    }
+  }
+  @media(orientation: portrait) and (min-width:1025px) and (max-width:1370px) {
+    #Partie4Vehicules {
+        justify-content: space-around; /* Meilleure répartition */
+        gap: 30px;
+        height: auto;
+        padding: 40px 20px;
+    }
+    
+    .Vehicules {
+        width: 450px; /* Taille adaptée */
+        height: 360px;
+        flex: none; /* Important pour contrôler la taille */
+    }
+  }
