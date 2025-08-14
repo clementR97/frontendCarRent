@@ -1,1 +1,172 @@
-<p>connexion-user works!</p>
+<!-- <div id="LoginPage">
+    <div id="LogoAndCard">
+        <div id="Logo"></div>
+        <div id="Card">
+            <span>Connexion à votre compte</span>
+            <button class="ButtonAouth"><div id="LogoGoogle" class="ParamLogo"></div>Connexion avec Google</button>
+            <button class="ButtonAouth"><div id="LogoApple" class="ParamLogo"></div>Connexion avec Google</button>
+            <div id="BarreSeparation">
+                <div class="Separation"></div>
+                <span>Ou</span>
+                <div class="Separation"></div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<div class="login-wrapper">
+    <div class="login-container">
+      
+      <!-- Header -->
+      <div class="login-header">
+        <div class="logo-container">
+          <div class="logo-icon"></div>
+        </div>
+        <h1 class="login-title">Bienvenue</h1>
+        <p class="login-subtitle">Connectez-vous à votre compte</p>
+      </div>
+
+      <!-- Messages -->
+      <div class="message success-message" *ngIf="showSuccessMessage">
+        <div class="message-icon">✓</div>
+        <span>Connexion réussie ! Redirection en cours...</span>
+      </div>
+
+      <div class="message error-message" *ngIf="generalError">
+        <div class="message-icon">⚠</div>
+        <span>{{ generalError }}</span>
+      </div>
+
+      <!-- Boutons sociaux -->
+      <div class="social-section">
+        <button 
+          class="social-btn google-btn" 
+          (click)="loginWithGoogle()" 
+          [disabled]="isLoading">
+          <div class="social-icon">
+            <svg viewBox="0 0 24 24" width="20" height="20">
+              <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+              <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+              <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+              <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+            </svg>
+          </div>
+          <span>Continuer avec Google</span>
+        </button>
+
+        <button 
+          class="social-btn apple-btn" 
+          (click)="loginWithApple()" 
+          [disabled]="isLoading">
+          <div class="social-icon apple-icon">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+              <path d="M16.365 1.43c0 1.14-.493 2.27-1.177 3.08-.744.9-1.99 1.57-2.987 1.57-.12 0-.23-.02-.3-.03-.01-.06-.04-.22-.04-.39 0-1.15.572-2.27 1.206-2.98.804-.94 2.142-1.64 3.248-1.68.03.13.05.28.05.43zm4.565 15.71c-.03.07-.463 1.58-1.518 3.12-.945 1.34-1.94 2.71-3.43 2.71-1.517 0-1.9-.88-3.63-.88-1.698 0-2.302.91-3.67.91-1.377 0-2.332-1.26-3.428-2.8-1.287-1.82-2.323-4.63-2.323-7.28 0-4.28 2.797-6.55 5.552-6.55 1.448 0 2.675.95 3.6.95.865 0 2.222-1.01 3.902-1.01.613 0 2.886.06 4.374 2.19-.13.09-2.383 1.37-2.383 4.19 0 3.26 2.854 4.42 2.966 4.475z"/>
+            </svg>
+          </div>
+          <span>Continuer avec Apple</span>
+        </button>
+      </div>
+
+      <!-- Séparateur -->
+      <div class="divider">
+        <div class="divider-line"></div>
+        <span class="divider-text">ou</span>
+        <div class="divider-line"></div>
+      </div>
+
+      <!-- Formulaire classique -->
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+        <div class="form-field">
+          <label class="form-label" for="email">Adresse e-mail</label>
+          <div class="input-wrapper">
+            <div class="input-icon">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+              </svg>
+            </div>
+            <input
+              type="email"
+              id="email"
+              formControlName="email"
+              placeholder="vous@exemple.com"
+              class="form-input"
+              [class.error]="isFieldInvalid('email')"
+            />
+          </div>
+          <div class="field-error" *ngIf="isFieldInvalid('email')">
+            <span *ngIf="loginForm.get('email')?.errors?.['required']">
+              L'adresse e-mail est requise
+            </span>
+            <span *ngIf="loginForm.get('email')?.errors?.['email']">
+              Veuillez saisir une adresse e-mail valide
+            </span>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="password">Mot de passe</label>
+          <div class="input-wrapper">
+            <div class="input-icon">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                <path d="M18,8h-1V6c0-2.76-2.24-5-5-5S7,3.24,7,6v2H6c-1.1,0-2,0.9-2,2v10c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2V10C20,8.9,19.1,8,18,8z M12,17c-1.1,0-2-0.9-2-2s0.9-2,2-2s2,0.9,2,2S13.1,17,12,17z M15.1,8H8.9V6c0-1.71,1.39-3.1,3.1-3.1s3.1,1.39,3.1,3.1V8z"/>
+              </svg>
+            </div>
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              id="password"
+              formControlName="password"
+              placeholder="••••••••"
+              class="form-input"
+              [class.error]="isFieldInvalid('password')"
+            />
+            <button
+              type="button"
+              class="password-toggle"
+              (click)="togglePasswordVisibility()">
+              <svg *ngIf="!showPassword" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+              </svg>
+              <svg *ngIf="showPassword" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                <path d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78l3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z"/>
+              </svg>
+            </button>
+          </div>
+          <div class="field-error" *ngIf="isFieldInvalid('password')">
+            <span *ngIf="loginForm.get('password')?.errors?.['required']">
+              Le mot de passe est requis
+            </span>
+            <span *ngIf="loginForm.get('password')?.errors?.['minlength']">
+              Le mot de passe doit contenir au moins 6 caractères
+            </span>
+          </div>
+        </div>
+
+        <div class="form-options">
+          <label class="checkbox-wrapper">
+            <input type="checkbox" formControlName="rememberMe" class="checkbox-input">
+            <span class="checkbox-custom"></span>
+            <span class="checkbox-text">Se souvenir de moi</span>
+          </label>
+          <a href="#" class="forgot-link" (click)="onForgotPassword($event)">
+            Mot de passe oublié ?
+          </a>
+        </div>
+
+        <button
+          type="submit"
+          class="submit-btn"
+          [disabled]="isLoading || loginForm.invalid">
+          <div class="loading-spinner" *ngIf="isLoading"></div>
+          <span>{{ isLoading ? 'Connexion en cours...' : 'Se connecter' }}</span>
+        </button>
+      </form>
+
+      <!-- Footer -->
+      <div class="login-footer">
+        <p>Pas encore de compte ?</p>
+        <a href="#" class="signup-link" (click)="onSignUp($event)">
+          Créer un compte
+        </a>
+      </div>
+    </div>
+  </div>
