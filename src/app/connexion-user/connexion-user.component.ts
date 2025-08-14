@@ -160,6 +160,6 @@ export class ConnexionUserComponent implements OnInit {
   onSignUp(event: Event): void {
     event.preventDefault();
     console.log('Redirection vers inscription');
-    // this.router.navigate(['/signup']);
+     this.router.navigate(['/inscription']);
   }
 }
