@@ -1,1 +1,162 @@
-<p>inscription-user works!</p>
+<div class="login-wrapper">
+    <div class="login-container">
+        <!-- Bouton retour -->
+        <button class="close-btn" (click)="goToHome()" aria-label="Retour à l'accueil">
+            <mat-icon>close</mat-icon>
+        </button>
+      <!-- Header -->
+      <div class="login-header">
+        <div class="logo-container">
+          <div class="logo-icon"></div>
+        </div>
+        <h1 class="login-title">Bienvenue</h1>
+        <p class="login-subtitle">Créer un compte</p>
+      </div>
+  
+      <!-- Messages -->
+      <div class="message success-message" *ngIf="showSuccessMessage">
+        <div class="message-icon">✓</div>
+        <span>Création du compte réussie ! Redirection en cours...</span>
+      </div>
+  
+      <div class="message error-message" *ngIf="generalError">
+        <div class="message-icon">⚠</div>
+        <span>{{ generalError }}</span>
+      </div>
+  
+      <!-- Formulaire classique -->
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="login-form">
+        
+        <!-- Nom -->
+        <div class="form-field">
+          <label class="form-label" for="nom">Votre nom</label>
+          <div class="input-wrapper">
+            <input
+              type="text"
+              id="nom"
+              formControlName="nom"
+              placeholder="Dupont"
+              class="form-input"
+              [class.error]="isFieldInvalid('nom')"
+            />
+          </div>
+          <div class="field-error" *ngIf="isFieldInvalid('nom')">
+            <span *ngIf="signupForm.get('nom')?.errors?.['required']">
+              Votre nom est requis
+            </span>
+          </div>
+        </div>
+  
+        <!-- Prénom -->
+        <div class="form-field">
+          <label class="form-label" for="prenom">Votre prénom</label>
+          <div class="input-wrapper">
+            <input
+              type="text"
+              id="prenom"
+              formControlName="prenom"
+              placeholder="Marc"
+              class="form-input"
+              [class.error]="isFieldInvalid('prenom')"
+            />
+          </div>
+          <div class="field-error" *ngIf="isFieldInvalid('prenom')">
+            <span *ngIf="signupForm.get('prenom')?.errors?.['required']">
+              Votre prénom est requis
+            </span>
+          </div>
+        </div>
+  
+        <!-- Email -->
+        <div class="form-field">
+          <label class="form-label" for="email">Adresse e-mail</label>
+          <div class="input-wrapper">
+            <input
+              type="email"
+              id="email"
+              formControlName="email"
+              placeholder="vous@exemple.com"
+              class="form-input"
+              [class.error]="isFieldInvalid('email')"
+            />
+          </div>
+          <div class="field-error" *ngIf="isFieldInvalid('email')">
+            <span *ngIf="signupForm.get('email')?.errors?.['required']">
+              L'adresse e-mail est requise
+            </span>
+            <span *ngIf="signupForm.get('email')?.errors?.['email']">
+              Veuillez saisir une adresse e-mail valide
+            </span>
+          </div>
+        </div>
+  
+        <!-- Mot de passe -->
+        <div class="form-field">
+          <label class="form-label" for="password">Mot de passe</label>
+          <div class="input-wrapper">
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              id="password"
+              formControlName="password"
+              placeholder="••••••••"
+              class="form-input"
+              [class.error]="isFieldInvalid('password')"
+            />
+            <button type="button" class="password-toggle" (click)="togglePasswordVisibility()">
+              {{ showPassword ? 'Cacher' : 'Afficher' }}
+            </button>
+          </div>
+          <div class="field-error" *ngIf="isFieldInvalid('password')">
+            <span *ngIf="signupForm.get('password')?.errors?.['required']">
+              Le mot de passe est requis
+            </span>
+            <span *ngIf="signupForm.get('password')?.errors?.['minlength']">
+              Le mot de passe doit contenir au moins 6 caractères
+            </span>
+          </div>
+        </div>
+  
+        <!-- Confirmation du mot de passe -->
+        <div class="form-field">
+          <label class="form-label" for="confirmPassword">Confirmer le mot de passe</label>
+          <div class="input-wrapper">
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              id="confirmPassword"
+              formControlName="confirmPassword"
+              placeholder="••••••••"
+              class="form-input"
+              [class.error]="isFieldInvalid('confirmPassword') || signupForm.errors?.['passwordMismatch']"
+            />
+          </div>
+          <div class="field-error" *ngIf="isFieldInvalid('confirmPassword')">
+            <span *ngIf="signupForm.get('confirmPassword')?.errors?.['required']">
+              La confirmation du mot de passe est requise
+            </span>
+          </div>
+          <div class="field-error" *ngIf="signupForm.errors?.['passwordMismatch'] && signupForm.get('confirmPassword')?.touched">
+            <span>Les mots de passe ne correspondent pas</span>
+          </div>
+        </div>
+  
+        <!-- Bouton -->
+        <button
+          type="submit"
+          class="submit-btn"
+          [disabled]="isLoading || signupForm.invalid">
+          <div class="loading-spinner" *ngIf="isLoading"></div>
+          <span>{{ isLoading ? 'Création en cours...' : 'Créer un compte' }}</span>
+        </button>
+      </form>
+  
+      <!-- Footer -->
+      <div class="login-footer">
+        <p>Vous avez déjà un compte ?</p>
+        <a href="#" class="signup-link" (click)="onConnection($event)">
+          Se connecter
+        </a>
+      </div>
+  
+    </div>
+  </div>
+  

@@ -162,4 +162,9 @@ export class ConnexionUserComponent implements OnInit {
     console.log('Redirection vers inscription');
      this.router.navigate(['/inscription']);
   }
+  goToHome():void{
+    
+    console.log('redirection vers home');
+    this.router.navigate(['/'])
+  }
 }
