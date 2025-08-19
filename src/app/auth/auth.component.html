@@ -1,0 +1,38 @@
+<div class="confirmation-wrapper">
+    <div class="confirmation-container">
+      
+      <!-- Bouton retour -->
+      <button class="close-btn" (click)="goToHome()" aria-label="Retour à l'accueil">
+        <mat-icon>close</mat-icon>
+      </button>
+  
+      <!-- Header -->
+      <div class="confirmation-header">
+        <div class="icon-wrapper">
+          <mat-icon class="email-icon">mail</mat-icon>
+        </div>
+        <h1>Confirmez votre email</h1>
+        <p *ngIf="email">
+          Un email de confirmation a été envoyé à <strong>{{ email }}</strong>.
+        </p>
+        <p *ngIf="!email">
+          Un email de confirmation vous a été envoyé.
+        </p>
+      </div>
+  
+      <!-- Message -->
+      <div class="confirmation-message">
+        <p>
+          Veuillez vérifier votre boîte de réception (et vos spams).
+          Cliquez sur le lien reçu pour activer votre compte.
+        </p>
+      </div>
+  
+      <!-- Footer -->
+      <div class="confirmation-footer">
+        <p>Vous avez déjà confirmé votre email ?</p>
+        <button class="btn" (click)="goToConnexion()">Se connecter</button>
+      </div>
+    </div>
+  </div>
+  

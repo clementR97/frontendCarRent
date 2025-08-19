@@ -96,7 +96,8 @@ export class ConnexionUserComponent implements OnInit {
         
         this.showSuccessMessage = true;
         setTimeout(() => {
-          this.router.navigate(['/dashboard']);
+          // this.router.navigate(['/dashboard']);
+          console.log("vous etes connecter");
         }, 1500);
 
       } catch (error: any) {

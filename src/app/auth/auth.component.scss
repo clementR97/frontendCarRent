@@ -1,0 +1,67 @@
+.confirmation-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #f9fafb;
+  }
+  
+  .confirmation-container {
+    background: white;
+    padding: 2rem;
+    border-radius: 1.25rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    max-width: 400px;
+    text-align: center;
+    position: relative;
+  }
+  
+  .close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .confirmation-header {
+    margin-bottom: 1.5rem;
+  }
+  
+  .icon-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+  
+  .email-icon {
+    font-size: 3rem;
+    color: #3f51b5;
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .confirmation-message {
+    font-size: 0.95rem;
+    color: #444;
+    margin-bottom: 1.5rem;
+  }
+  
+  .confirmation-footer .btn {
+    background: #3f51b5;
+    color: white;
+    padding: 0.75rem 1.25rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .confirmation-footer .btn:hover {
+    background: #303f9f;
+  }
+  
