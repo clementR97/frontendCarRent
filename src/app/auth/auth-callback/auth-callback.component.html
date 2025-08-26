@@ -1,0 +1,40 @@
+
+<!-- <div class="callback-wrapper">
+    <div class="callback-container">
+      <div class="loading-content">
+        <div class="loading-spinner"></div>
+        <h2>{{ loadingMessage }}</h2>
+        <p>{{ loadingSubtitle }}</p>
+      </div> -->
+      
+      <!-- Message d'erreur -->
+      <!-- <div class="error-content" *ngIf="hasError">
+        <div class="error-icon">⚠️</div>
+        <h2>Erreur d'authentification</h2>
+        <p>{{ errorMessage }}</p>
+        <button class="retry-btn" (click)="goToResetPassword()">
+          Demander un nouveau lien
+        </button>
+      </div>
+    </div>
+  </div> -->
+
+  <div class="callback-wrapper">
+    <div class="callback-container">
+      <div class="loading-content">
+        <div class="loading-spinner"></div>
+        <h2>{{ loadingMessage }}</h2>
+        <p>{{ loadingSubtitle }}</p>
+      </div>
+      
+      <!-- Message d'erreur -->
+      <div class="error-content" *ngIf="hasError">
+        <div class="error-icon">⚠️</div>
+        <h2>Erreur d'authentification</h2>
+        <p>{{ errorMessage }}</p>
+        <button class="retry-btn" (click)="goToResetPassword()">
+          Demander un nouveau lien
+        </button>
+      </div>
+    </div>
+  </div>

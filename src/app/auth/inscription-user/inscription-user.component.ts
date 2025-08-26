@@ -4,7 +4,7 @@ import { ReactiveFormsModule, FormGroup, FormBuilder, Validators, AbstractContro
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 
-import {SupabaseAuthService} from '../services/supabase-auth.service'
+import {SupabaseAuthService} from '../../services/supabase-auth.service'
 @Component({
   selector: 'app-inscription-user',
   imports: [CommonModule, ReactiveFormsModule, MatIconModule],
@@ -132,7 +132,7 @@ export class InscriptionUserComponent implements OnInit {
   // Navigation vers la connexion
   onConnection(event: Event): void {
     event.preventDefault();
-    this.router.navigate(['/connexion']);
+    this.router.navigate(['/auth/login']);
   }
 
   // Navigation vers l'accueil

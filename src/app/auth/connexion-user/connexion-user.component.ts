@@ -1,6 +1,7 @@
 import { Component, OnInit,EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
 import { ReactiveFormsModule,FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 import {MatIconModule} from '@angular/material/icon';
 import { Router } from '@angular/router';
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-connexion-user',
-  imports: [CommonModule,ReactiveFormsModule,MatIconModule],
+  imports: [CommonModule,ReactiveFormsModule,MatIconModule,RouterModule],
   templateUrl: './connexion-user.component.html',
   styleUrl: './connexion-user.component.scss'
 })
@@ -155,13 +156,13 @@ export class ConnexionUserComponent implements OnInit {
   onForgotPassword(event: Event): void {
     event.preventDefault();
     console.log('Redirection vers mot de passe oublié');
-    // this.router.navigate(['/forgot-password']);
+     this.router.navigate(['/auth/reset-password']);
   }
 
   onSignUp(event: Event): void {
     event.preventDefault();
     console.log('Redirection vers inscription');
-     this.router.navigate(['/inscription']);
+     this.router.navigate(['/auth/signup']);
   }
   goToHome():void{
     
