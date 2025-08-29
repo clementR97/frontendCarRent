@@ -14,42 +14,7 @@ import { Router } from '@angular/router';
   templateUrl: './connexion-user.component.html',
   styleUrl: './connexion-user.component.scss'
 })
-// export class ConnexionUserComponent implements OnInit {
-//   form!: FormGroup;
 
-//   @Output() googleSignIn = new EventEmitter<void>();
-//   @Output() appleSignIn = new EventEmitter<void>();
-//   @Output() emailSignIn = new EventEmitter<{ email: string; password: string }>();
-
-//   constructor(private fb: FormBuilder) {}
-
-//   ngOnInit(): void {
-//     this.form = this.fb.group({
-//       email: ['', [Validators.required, Validators.email]],
-//       password: ['', [Validators.required, Validators.minLength(6)]],
-//     });
-//   }
-
-//   onGoogle(): void {
-//     this.googleSignIn.emit();
-//     // TODO: Connecter Google OAuth (ex: via Supabase Auth)
-//     console.log('Google OAuth: implémentez votre logique ici.');
-//   }
-
-//   onApple(): void {
-//     this.appleSignIn.emit();
-//     // TODO: Connecter Apple OAuth
-//     console.log('Apple OAuth: implémentez votre logique ici.');
-//   }
-
-//   onSubmit(): void {
-//     if (this.form.invalid) {
-//       this.form.markAllAsTouched();
-//       return;
-//     }
-//     this.emailSignIn.emit(this.form.value);
-//   }
-// }
 export class ConnexionUserComponent implements OnInit {
   loginForm!: FormGroup;
   isLoading = false;
@@ -89,8 +54,8 @@ export class ConnexionUserComponent implements OnInit {
       this.generalError = '';
 
       try {
-        const formData = this.loginForm.value;
-        console.log('Connexion classique:', formData);
+        //const formData = this.loginForm.value;
+        //console.log('Connexion classique:', formData);
 
         // Simulation d'authentification
         await new Promise(resolve => setTimeout(resolve, 2000));
