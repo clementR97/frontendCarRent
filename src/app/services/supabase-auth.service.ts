@@ -1,8 +1,11 @@
+// 
 import { Injectable } from '@angular/core';
 import { createClient, SupabaseClient, User, Session } from '@supabase/supabase-js';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import {environment} from '../../environements/environement';
+// ✅ CORRECTION : Chemin d'import correct
+import { environment } from '../../environements/environement'; // pas "environements"
+
 @Injectable({
   providedIn: 'root'
 })
@@ -19,18 +22,17 @@ export class SupabaseAuthService {
   public readonly loading$: Observable<boolean> = this._loading.asObservable();
 
   constructor(private router: Router) {
-    
+    // ✅ Configuration Supabase avec les variables d'environnement
     this.supabase = createClient(
       environment.supabase.url,
       environment.supabase.anonKey,
       {
         auth: {
-          // Configuration pour éviter les conflits de session
           storage: window.localStorage,
           autoRefreshToken: true,
           persistSession: true,
           detectSessionInUrl: true,
-          flowType: 'pkce' // Plus sécurisé
+          flowType: 'pkce'
         }
       }
     );
@@ -40,10 +42,8 @@ export class SupabaseAuthService {
   // Initialiser l'authentification
   private async initializeAuth(): Promise<void> {
     try {
-      // Nettoyer les sessions en conflit
       await this.clearConflictingSessions();
 
-      // Récupérer la session existante
       const { data: { session }, error } = await this.supabase.auth.getSession();
       
       if (error) {
@@ -52,7 +52,6 @@ export class SupabaseAuthService {
         this.updateAuthState(session);
       }
 
-      // Écouter les changements d'authentification
       this.supabase.auth.onAuthStateChange((event, session) => {
         console.log('🔐 Auth State Changed:', event, session?.user?.email);
         this.updateAuthState(session);
@@ -66,33 +65,35 @@ export class SupabaseAuthService {
     }
   }
 
-  // Nettoyer les sessions en conflit
+  // ✅ Nettoyer les sessions en conflit - Version corrigée
   private async clearConflictingSessions(): Promise<void> {
     try {
-      // Supprimer les clés de session corrompues
-      const keysToRemove = Object.keys(localStorage).filter(key => 
-        key.includes('supabase.auth.token') && key.includes('pehsmndxkjqqlyrysfws')
-      );
+      // Extraire l'ID du projet depuis l'URL d'environnement
+      const projectRef = environment.supabase.url.split('//')[1]?.split('.')[0];
       
-      keysToRemove.forEach(key => {
-        try {
-          localStorage.removeItem(key);
-        } catch (e) {
-          console.warn('Impossible de supprimer la clé:', key);
-        }
-      });
+      if (projectRef) {
+        const keysToRemove = Object.keys(localStorage).filter(key => 
+          key.includes('supabase.auth.token') && key.includes(projectRef)
+        );
+        
+        keysToRemove.forEach(key => {
+          try {
+            localStorage.removeItem(key);
+          } catch (e) {
+            console.warn('Impossible de supprimer la clé:', key);
+          }
+        });
+      }
     } catch (error) {
       console.warn('Erreur nettoyage sessions:', error);
     }
   }
 
-  // Mettre à jour l'état d'authentification
   private updateAuthState(session: Session | null): void {
     this._session.next(session);
     this._currentUser.next(session?.user ?? null);
   }
 
-  // Gérer les événements d'authentification
   private handleAuthEvents(event: string, session: Session | null): void {
     switch (event) {
       case 'SIGNED_IN':
@@ -111,7 +112,6 @@ export class SupabaseAuthService {
         break;
       case 'PASSWORD_RECOVERY':
         console.log('🔑 Récupération de mot de passe');
-        // Rediriger vers la page de nouveau mot de passe
         this.router.navigate(['/auth/update-password']);
         break;
     }
@@ -152,22 +152,30 @@ export class SupabaseAuthService {
     }
   }
 
-  // CONNEXION
+  // ✅ CONNEXION SÉCURISÉE
   async signIn(email: string, password: string) {
     try {
+      console.log('🔄 Tentative de connexion pour:', email);
+      
       const { data, error } = await this.supabase.auth.signInWithPassword({
         email: email.trim().toLowerCase(),
         password
       });
 
-      if (error) throw error;
+      if (error) {
+        console.error('❌ Erreur Supabase signIn:', error);
+        throw error;
+      }
 
+      console.log('✅ Connexion Supabase réussie:', data.user?.email);
+      
       return {
         success: true,
         data,
         message: 'Connexion réussie !'
       };
     } catch (error: any) {
+      console.error('❌ Erreur dans signIn:', error);
       return {
         success: false,
         error: this.getErrorMessage(error),
@@ -175,34 +183,34 @@ export class SupabaseAuthService {
       };
     }
   }
-  //CONNEXION GOOGLE
-  async loginWithGoogle(){
-    try{
-      const {data,error} = await this.supabase.auth.signInWithOAuth({
-        provider:'google',
-        options:{redirectTo: `${window.location.origin}/auth/callback`}
+
+  // CONNEXION GOOGLE
+  async loginWithGoogle() {
+    try {
+      const { data, error } = await this.supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: { redirectTo: `${window.location.origin}/auth/callback` }
       });
-      if(error)throw(error);
-      return {success:true,data};
-    }
-    catch(error:any){
-      console.error('Erreur Google Auth:',error);
-      return{success:false, error:this.getErrorMessage(error)};
+      if (error) throw error;
+      return { success: true, data };
+    } catch (error: any) {
+      console.error('Erreur Google Auth:', error);
+      return { success: false, error: this.getErrorMessage(error) };
     }
   }
 
-  //CONNEXION APPLE
-  async loginWithApple(){
-    try{
-      const {data,error} = await this.supabase.auth.signInWithOAuth({
-        provider:'apple',
-        options:{redirectTo:`${window.location.origin}/auth/callback`}
+  // CONNEXION APPLE
+  async loginWithApple() {
+    try {
+      const { data, error } = await this.supabase.auth.signInWithOAuth({
+        provider: 'apple',
+        options: { redirectTo: `${window.location.origin}/auth/callback` }
       });
-      if(error)throw(error);
-      return {success:true,data};
-    }catch(error:any){
-      console.error('Erreur Apple Auth:',error);
-      return{success:false,error:this.getErrorMessage(error)};
+      if (error) throw error;
+      return { success: true, data };
+    } catch (error: any) {
+      console.error('Erreur Apple Auth:', error);
+      return { success: false, error: this.getErrorMessage(error) };
     }
   }
 
@@ -212,7 +220,6 @@ export class SupabaseAuthService {
       const { error } = await this.supabase.auth.signOut();
       if (error) throw error;
 
-      // Nettoyer le localStorage après déconnexion
       await this.clearConflictingSessions();
 
       return {
@@ -227,13 +234,12 @@ export class SupabaseAuthService {
     }
   }
 
-  // RÉINITIALISATION DE MOT DE PASSE - CORRIGÉE
+  // RÉINITIALISATION DE MOT DE PASSE
   async resetPassword(email: string) {
     try {
       const { error } = await this.supabase.auth.resetPasswordForEmail(
         email.trim().toLowerCase(),
         {
-          // ✅ URL CORRIGÉE - doit correspondre à votre route
           redirectTo: `${window.location.origin}/auth/callback-password`
         }
       );
@@ -275,7 +281,6 @@ export class SupabaseAuthService {
     }
   }
 
-  // MÉTHODE POUR GÉRER LE CALLBACK D'AUTH - NOUVELLE
   async handleAuthCallback(): Promise<{ success: boolean; type?: string; error?: string }> {
     try {
       const { data, error } = await this.supabase.auth.getSession();
@@ -292,7 +297,7 @@ export class SupabaseAuthService {
         console.log('✅ Session établie via callback');
         return { 
           success: true, 
-          type: 'recovery' // Pour indiquer que c'est un reset password
+          type: 'recovery'
         };
       }
 
