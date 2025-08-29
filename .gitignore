@@ -42,8 +42,8 @@ testem.log
 Thumbs.db
 
 # Environment files - ✅ CRITIQUE
-/src/environments/environment.ts
-/src/environments/environment.prod.ts
+/src/environements/environement.ts
+/src/environements/environement.prod.ts
 *.env
 *.env.local
 *.env.production
