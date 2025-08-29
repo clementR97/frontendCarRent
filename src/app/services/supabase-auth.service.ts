@@ -4,7 +4,7 @@ import { createClient, SupabaseClient, User, Session } from '@supabase/supabase-
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 // ✅ CORRECTION : Chemin d'import correct
-import { environment } from '../../environements/environement'; // pas "environements"
+import { environment } from '../../environments/environment'; // pas "environements"
 
 @Injectable({
   providedIn: 'root'
