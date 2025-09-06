@@ -42,7 +42,7 @@ export class AuthComponent implements OnInit {
   }
 
   goToConnexion(): void {
-    this.router.navigate(['/connexion']);
+    this.router.navigate(['/auth/login']);
   }
 }
 

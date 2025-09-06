@@ -138,7 +138,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Router } from '@angular/router';
+import { RouterModule, Router,ActivatedRoute } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { Subscription } from 'rxjs';
 
@@ -156,6 +156,7 @@ export class ConnexionUserComponent implements OnInit, OnDestroy {
   isLoading = false;
   showPassword = false;
   showSuccessMessage = false;
+  successMessage : string | null = null
   generalError = '';
 
   private subscription = new Subscription();
@@ -163,12 +164,20 @@ export class ConnexionUserComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private supabaseAuth: SupabaseAuthService // ✅ Injection du service
+    private supabaseAuth: SupabaseAuthService, // ✅ Injection du service
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.initForm();
     this.checkIfAlreadyLoggedIn();
+    const message = this.route.snapshot.queryParamMap.get('message');
+  if (message) {
+    this.successMessage = message;
+    setTimeout(() => {
+      this.successMessage = null;
+    }, 5000);
+  }
   }
 
   ngOnDestroy(): void {
@@ -261,31 +270,7 @@ export class ConnexionUserComponent implements OnInit, OnDestroy {
     }
   }
 
-  // ✅ CONNEXION APPLE SÉCURISÉE
-  async loginWithApple(): Promise<void> {
-    try {
-      this.isLoading = true;
-      this.generalError = '';
-      
-      console.log('🔄 Connexion avec Apple...');
-      const result = await this.supabaseAuth.loginWithApple();
-      
-      if (result.success) {
-        console.log('✅ Redirection Apple en cours...');
-        // La redirection vers Apple se fait automatiquement
-        // Le callback reviendra sur /auth/callback
-      } else {
-        this.generalError = result.error || 'Erreur lors de la connexion avec Apple';
-        console.error('❌ Erreur Apple Auth:', result.error);
-      }
-      
-    } catch (error: any) {
-      console.error('❌ Erreur Apple Auth:', error);
-      this.generalError = 'Erreur lors de la connexion avec Apple';
-    } finally {
-      this.isLoading = false;
-    }
-  }
+  
 
   // ✅ Marquer tous les champs comme touchés
   private markFormGroupTouched(): void {

@@ -94,7 +94,7 @@ export class InscriptionUserComponent implements OnInit {
       if (result.needsEmailConfirmation) {
         // Email de confirmation nécessaire
         setTimeout(() => {
-          this.router.navigate(['/redirectionSubcribe'], {
+          this.router.navigate(['/auth/redirection'], {
             queryParams: { email }
             
           });

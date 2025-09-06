@@ -129,7 +129,8 @@ export class SupabaseAuthService {
             prenom: userData.prenom.trim(),
             full_name: `${userData.prenom.trim()} ${userData.nom.trim()}`
           } : undefined,
-          emailRedirectTo: `${window.location.origin}/auth/callback-password`
+          //a modifier
+          emailRedirectTo: `${window.location.origin}/auth/confirm`
         }
       });
 
@@ -189,7 +190,7 @@ export class SupabaseAuthService {
     try {
       const { data, error } = await this.supabase.auth.signInWithOAuth({
         provider: 'google',
-        options: { redirectTo: `${window.location.origin}/auth/callback` }
+        options: { redirectTo: `${window.location.origin}/auth/google-callback` }
       });
       if (error) throw error;
       return { success: true, data };
@@ -199,20 +200,6 @@ export class SupabaseAuthService {
     }
   }
 
-  // CONNEXION APPLE
-  async loginWithApple() {
-    try {
-      const { data, error } = await this.supabase.auth.signInWithOAuth({
-        provider: 'apple',
-        options: { redirectTo: `${window.location.origin}/auth/callback` }
-      });
-      if (error) throw error;
-      return { success: true, data };
-    } catch (error: any) {
-      console.error('Erreur Apple Auth:', error);
-      return { success: false, error: this.getErrorMessage(error) };
-    }
-  }
 
   // DÉCONNEXION
   async signOut() {
