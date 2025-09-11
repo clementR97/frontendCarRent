@@ -1,0 +1,68 @@
+<!-- src/app/admin/login/admin-login.component.html -->
+<div class="admin-login-container">
+    <div class="login-card">
+      <div class="logo-section">
+        <h1>🚗 CARRENT</h1>
+        <h2>Admin Dashboard</h2>
+      </div>
+  
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="email">Email Admin</label>
+          <input 
+            id="email" 
+            type="email" 
+            formControlName="email" 
+            class="form-control"
+            [class.invalid]="email?.invalid && email?.touched"
+            placeholder="admin@carrent.com">
+          <div *ngIf="email?.errors?.['required'] && email?.touched" class="error">
+            Email requis
+          </div>
+          <div *ngIf="email?.errors?.['email'] && email?.touched" class="error">
+            Email invalide
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label for="motdePasse">Mot de passe</label>
+          <input 
+            id="motdePasse" 
+            type="password" 
+            formControlName="motdePasse" 
+            class="form-control"
+            [class.invalid]="motdePasse?.invalid && motdePasse?.touched"
+            placeholder="••••••••">
+          <div *ngIf="motdePasse?.errors?.['required'] && motdePasse?.touched" class="error">
+            Mot de passe requis
+          </div>
+          <div *ngIf="motdePasse?.errors?.['minlength'] && motdePasse?.touched" class="error">
+            Minimum 6 caractères
+          </div>
+        </div>
+  
+        <div *ngIf="errorMessage" class="error-message">
+          <span class="error-icon">⚠️</span>
+          {{ errorMessage }}
+        </div>
+  
+        <button 
+          type="submit" 
+          class="login-btn" 
+          [disabled]="!loginForm.valid || loading">
+          <span *ngIf="loading" class="loading-spinner">🔄</span>
+          <span *ngIf="loading">Connexion...</span>
+          <span *ngIf="!loading">🔐 Se connecter</span>
+        </button>
+      </form>
+  
+      <div class="security-info">
+        <span class="shield-icon">🛡️</span>
+        Zone sécurisée - Administrateurs uniquement
+      </div>
+  
+      <div class="version-info">
+        Carrent Admin v1.0
+      </div>
+    </div>
+  </div>

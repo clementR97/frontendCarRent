@@ -9,6 +9,10 @@ import { HomeComponent } from './home/home.component';
  import{ConfirmComponent} from './auth/confirm/confirm.component';
  import { GoogleCallbackComponent } from './auth/google-callback/google-callback.component';
  
+ import { AdminGuard } from './admin_Zone/guards/admin.guard';
+ import { AdminPageComponent} from './admin_Zone/admin-page/admin-page.component';
+
+   
 export const routes: Routes = [
    {path:'',component: HomeComponent},
    // partie connexion,inscription,forget,redirection,supabase,callback
@@ -25,5 +29,22 @@ export const routes: Routes = [
          
       ]
    },
+   {path:'admin-login-ops-x7k9',component:AdminPageComponent,title:'Carrent Admin - Connexion'},
+   {path:'carrent-admin-ops-x7k9',
+       
+      canActivate:[AdminGuard],
+      title:'Carrent Admin - Dashboard',
+      loadComponent: () => import('./admin_Zone/admin-dashboard/admin-dashboard.component').then(c => c.AdminDashboardComponent) // Lazy loading optionnel
+
+   },
+   // Redirection admin
+  {
+   path: 'admin',
+   redirectTo: '/carrent-admin-ops-x7k9',
+   pathMatch: 'full'
+ },
+
+ // Route wildcard (404) - toujours en dernier
+ { path: '**', redirectTo: '' }
 
 ];
