@@ -1,1 +1,102 @@
-<p>admin-dashboard works!</p>
+<div class="admin-dashboard">
+    <div class="dashboard-header">
+      <h1>🚗 Gestion des Voitures</h1>
+      <button class="btn-add" (click)="openAddForm()">
+        ➕ Ajouter une voiture
+      </button>
+    </div>
+  
+    <!-- Liste des voitures -->
+    <div class="voitures-grid" *ngIf="!showForm">
+      <div class="voiture-card" *ngFor="let voiture of voitures">
+        <div class="voiture-info">
+          <h3>{{ voiture.marque }} {{ voiture.modele }}</h3>
+          <p><strong>Année:</strong> {{ voiture.annee }}</p>
+          <p><strong>Prix/jour:</strong> {{ voiture.prixParJour }}€</p>
+          <p><strong>Statut:</strong> 
+            <span [class]="voiture.disponible ? 'status-available' : 'status-unavailable'">
+              {{ voiture.disponible ? 'Disponible' : 'Indisponible' }}
+            </span>
+          </p>
+        </div>
+        <div class="voiture-actions">
+          <button class="btn-edit" (click)="openEditForm(voiture)">
+            ✏️ Modifier
+          </button>
+          <button class="btn-delete" (click)="deleteVoiture(voiture._id!)">
+            ��️ Supprimer
+          </button>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Formulaire d'ajout/modification -->
+    <div class="form-container" *ngIf="showForm && selectedVoiture">
+      <div class="form-card">
+        <h2>{{ isEditing ? 'Modifier la voiture' : 'Ajouter une voiture' }}</h2>
+        
+        <form (ngSubmit)="saveVoiture()">
+          <div class="form-group">
+            <label for="marque">Marque *</label>
+            <input 
+              id="marque" 
+              type="text" 
+              [(ngModel)]="selectedVoiture.marque" 
+              name="marque" 
+              required>
+          </div>
+  
+          <div class="form-group">
+            <label for="modele">Modèle *</label>
+            <input 
+              id="modele" 
+              type="text" 
+              [(ngModel)]="selectedVoiture.modele" 
+              name="modele" 
+              required>
+          </div>
+  
+          <div class="form-group">
+            <label for="annee">Année *</label>
+            <input 
+              id="annee" 
+              type="text" 
+              [(ngModel)]="selectedVoiture.annee" 
+              name="annee" 
+              required>
+          </div>
+  
+          <div class="form-group">
+            <label for="prixParJour">Prix par jour (€) *</label>
+            <input 
+              id="prixParJour" 
+              type="number" 
+              [(ngModel)]="selectedVoiture.prixParJour" 
+              name="prixParJour" 
+              min="0" 
+              step="0.01" 
+              required>
+          </div>
+  
+          <div class="form-group">
+            <label class="checkbox-label">
+              <input 
+                type="checkbox" 
+                [(ngModel)]="selectedVoiture.disponible" 
+                name="disponible">
+              Disponible
+            </label>
+          </div>
+  
+          <div class="form-actions">
+            <button type="submit" class="btn-save">
+              {{ isEditing ? '💾 Modifier' : '➕ Ajouter' }}
+            </button>
+            <button type="button" class="btn-cancel" (click)="closeForm()">
+              ❌ Annuler
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

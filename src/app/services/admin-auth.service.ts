@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-
+import { ApiUrl } from '../../environments/environment';
 export interface AdminUser {
   id: string;
   nom: string;
@@ -22,7 +22,7 @@ export interface LoginResponse {
   providedIn: 'root'
 })
 export class AdminAuthService {
-  private apiUrl = 'http://localhost:3000/api/admin';
+   private apiUrl = ApiUrl.ApiUrl+'/api/admin';
   private currentAdminSubject = new BehaviorSubject<AdminUser | null>(null);
   public currentAdmin$ = this.currentAdminSubject.asObservable();
 
