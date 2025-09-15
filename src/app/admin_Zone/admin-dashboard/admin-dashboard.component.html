@@ -1,102 +1,236 @@
 <div class="admin-dashboard">
-    <div class="dashboard-header">
-      <h1>🚗 Gestion des Voitures</h1>
-      <button class="btn-add" (click)="openAddForm()">
-        ➕ Ajouter une voiture
-      </button>
-    </div>
-  
-    <!-- Liste des voitures -->
-    <div class="voitures-grid" *ngIf="!showForm">
-      <div class="voiture-card" *ngFor="let voiture of voitures">
-        <div class="voiture-info">
-          <h3>{{ voiture.marque }} {{ voiture.modele }}</h3>
-          <p><strong>Année:</strong> {{ voiture.annee }}</p>
-          <p><strong>Prix/jour:</strong> {{ voiture.prixParJour }}€</p>
-          <p><strong>Statut:</strong> 
-            <span [class]="voiture.disponible ? 'status-available' : 'status-unavailable'">
-              {{ voiture.disponible ? 'Disponible' : 'Indisponible' }}
-            </span>
-          </p>
-        </div>
-        <div class="voiture-actions">
-          <button class="btn-edit" (click)="openEditForm(voiture)">
-            ✏️ Modifier
-          </button>
-          <button class="btn-delete" (click)="deleteVoiture(voiture._id!)">
-            ��️ Supprimer
-          </button>
+  <div class="dashboard-header">
+    <h1>🚗 Gestion des Voitures</h1>
+    <button class="btn-add" (click)="openAddForm()">
+      ➕ Ajouter une voiture
+    </button>
+  </div>
+
+  <!-- Liste des voitures -->
+  <div class="voitures-grid" *ngIf="!showForm">
+    <div class="voiture-card" *ngFor="let voiture of voitures">
+      <div class="voiture-info">
+        <h3>{{ voiture.marque }} {{ voiture.modele }}</h3>
+        <p><strong>Année:</strong> {{ voiture.annee }}</p>
+        <p><strong>Prix/jour:</strong> {{ voiture.prixParJour }}€</p>
+        <p><strong>Statut:</strong> 
+          <span [class]="voiture.disponible ? 'status-available' : 'status-unavailable'">
+            {{ voiture.disponible ? 'Disponible' : 'Indisponible' }}
+          </span>
+        </p>
+        
+        <!-- Aperçu des images -->
+        <div class="voiture-images" *ngIf="voiture.images && voiture.images.length > 0">
+          <img 
+            *ngFor="let img of voiture.images" 
+            [src]="img.url" 
+            [alt]="img.alt" 
+            class="voiture-thumb">
         </div>
       </div>
-    </div>
-  
-    <!-- Formulaire d'ajout/modification -->
-    <div class="form-container" *ngIf="showForm && selectedVoiture">
-      <div class="form-card">
-        <h2>{{ isEditing ? 'Modifier la voiture' : 'Ajouter une voiture' }}</h2>
-        
-        <form (ngSubmit)="saveVoiture()">
-          <div class="form-group">
-            <label for="marque">Marque *</label>
-            <input 
-              id="marque" 
-              type="text" 
-              [(ngModel)]="selectedVoiture.marque" 
-              name="marque" 
-              required>
-          </div>
-  
-          <div class="form-group">
-            <label for="modele">Modèle *</label>
-            <input 
-              id="modele" 
-              type="text" 
-              [(ngModel)]="selectedVoiture.modele" 
-              name="modele" 
-              required>
-          </div>
-  
-          <div class="form-group">
-            <label for="annee">Année *</label>
-            <input 
-              id="annee" 
-              type="text" 
-              [(ngModel)]="selectedVoiture.annee" 
-              name="annee" 
-              required>
-          </div>
-  
-          <div class="form-group">
-            <label for="prixParJour">Prix par jour (€) *</label>
-            <input 
-              id="prixParJour" 
-              type="number" 
-              [(ngModel)]="selectedVoiture.prixParJour" 
-              name="prixParJour" 
-              min="0" 
-              step="0.01" 
-              required>
-          </div>
-  
-          <div class="form-group">
-            <label class="checkbox-label">
-              <input 
-                type="checkbox" 
-                [(ngModel)]="selectedVoiture.disponible" 
-                name="disponible">
-              Disponible
-            </label>
-          </div>
-  
-          <div class="form-actions">
-            <button type="submit" class="btn-save">
-              {{ isEditing ? '💾 Modifier' : '➕ Ajouter' }}
-            </button>
-            <button type="button" class="btn-cancel" (click)="closeForm()">
-              ❌ Annuler
-            </button>
-          </div>
-        </form>
+      <div class="voiture-actions">
+        <button class="btn-edit" (click)="openEditForm(voiture)">
+          ✏️ Modifier
+        </button>
+        <button class="btn-delete" (click)="deleteVoiture(voiture._id!)">
+          🗑️ Supprimer
+        </button>
       </div>
     </div>
   </div>
+
+  <!-- Formulaire d'ajout/modification -->
+  <div class="form-container" *ngIf="showForm && selectedVoiture">
+    <div class="form-card">
+      <h2>{{ isEditing ? 'Modifier la voiture' : 'Ajouter une voiture' }}</h2>
+      
+      <form (ngSubmit)="saveVoiture()">
+        <div class="form-group">
+          <label for="marque">Marque *</label>
+          <input 
+            id="marque" 
+            type="text" 
+            [(ngModel)]="selectedVoiture.marque" 
+            name="marque" 
+            required>
+        </div>
+
+        <div class="form-group">
+          <label for="modele">Modèle *</label>
+          <input 
+            id="modele" 
+            type="text" 
+            [(ngModel)]="selectedVoiture.modele" 
+            name="modele" 
+            required>
+        </div>
+
+        <div class="form-group">
+          <label for="annee">Année *</label>
+          <input 
+            id="annee" 
+            type="text" 
+            [(ngModel)]="selectedVoiture.annee" 
+            name="annee" 
+            required>
+        </div>
+
+        <div class="form-group">
+          <label for="prixParJour">Prix par jour (€) *</label>
+          <input 
+            id="prixParJour" 
+            type="number" 
+            [(ngModel)]="selectedVoiture.prixParJour" 
+            name="prixParJour" 
+            min="0" 
+            step="0.01" 
+            required>
+        </div>
+
+        <div class="form-group">
+          <label class="checkbox-label">
+            <input 
+              type="checkbox" 
+              [(ngModel)]="selectedVoiture.disponible" 
+              name="disponible">
+            Disponible
+          </label>
+        </div>
+
+        <!-- Dans la section IA pour les images -->
+        <div class="form-group ai-section">
+          <label>Images avec IA 🤖</label>
+          
+          <!-- Upload multiple d'images -->
+          <input 
+            type="file" 
+            accept="image/*" 
+            multiple
+            (change)="onFilesSelected($event)"
+            class="file-input">
+          
+          <!-- Sélection du fond -->
+          <div class="background-selector">
+            <label>Fond souhaité :</label>
+            <select [(ngModel)]="selectedBackground" name="background">
+              <option *ngFor="let bg of availableBackgrounds" [value]="bg.value">
+                {{ bg.name }}
+              </option>
+            </select>
+          </div>
+
+          <!-- Bouton de traitement IA pour toutes les images -->
+          <button 
+            type="button" 
+            class="btn-ai-process" 
+            (click)="processAllImagesWithAI()"
+            [disabled]="!selectedFiles || selectedFiles.length === 0">
+            🤖 Traiter {{ selectedFiles?.length || 0 }} images avec IA
+          </button>
+
+          <!-- Liste des images sélectionnées -->
+          <div class="selected-files" *ngIf="selectedFiles && selectedFiles.length > 0">
+            <h5>Images sélectionnées ({{ selectedFiles.length }}/6) :</h5>
+            <div class="files-list">
+              <div class="file-item" *ngFor="let file of selectedFiles; let i = index">
+                <span>{{ file.name }}</span>
+                <button type="button" class="btn-remove-file" (click)="removeFile(i)">
+                  ❌
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Résultats du traitement IA -->
+          <div class="ai-results" *ngIf="processedImages.length > 0">
+            <h4>Images traitées avec IA :</h4>
+            
+            <div class="processed-images-grid">
+              <div class="processed-image-item" *ngFor="let imageData of processedImages; let i = index">
+                <h5>Image {{ i + 1 }}</h5>
+                
+                <!-- Sélection d'image principale -->
+                <div class="image-selection">
+                  <div class="image-options">
+                    <div class="image-option" (click)="selectImageForIndex(i, 'original')" [class.selected]="imageData.selectedUrl === imageData.variants.original">
+                      <img [src]="imageData.variants.original" alt="Original">
+                      <span>Original</span>
+                    </div>
+                    
+                    <div class="image-option" (click)="selectImageForIndex(i, 'backgroundRemoved')" [class.selected]="imageData.selectedUrl === imageData.variants.backgroundRemoved">
+                      <img [src]="imageData.variants.backgroundRemoved" alt="Sans fond">
+                      <span>Sans fond</span>
+                    </div>
+                    
+                    <div class="image-option" (click)="selectImageForIndex(i, 'withGrayBackground')" [class.selected]="imageData.selectedUrl === imageData.variants.withGrayBackground">
+                      <img [src]="imageData.variants.withGrayBackground" alt="Fond gris">
+                      <span>Fond gris</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Variantes d'arrière-plan -->
+                <div class="background-variants" *ngIf="imageData.backgroundVariants && imageData.backgroundVariants.length > 0">
+                  <h6>Fonds personnalisés :</h6>
+                  <div class="variants-grid">
+                    <div 
+                      class="variant-item" 
+                      *ngFor="let variant of imageData.backgroundVariants"
+                      (click)="selectBackgroundVariantForIndex(i, variant)"
+                      [class.selected]="imageData.selectedUrl === variant.url">
+                      <img [src]="variant.url" [alt]="variant.color">
+                      <span>{{ variant.name }}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Bouton pour ajouter cette image -->
+                <button 
+                  type="button" 
+                  class="btn-add-single-image" 
+                  (click)="addSingleImageToVoiture(i)"
+                  [disabled]="!imageData.selectedUrl">
+                  ➕ Ajouter cette image
+                </button>
+              </div>
+            </div>
+
+            <!-- Bouton pour ajouter toutes les images -->
+            <button 
+              type="button" 
+              class="btn-add-all-images" 
+              (click)="addAllImagesToVoiture()"
+              [disabled]="processedImages.length === 0">
+              ➕ Ajouter toutes les images ({{ processedImages.length }})
+            </button>
+          </div>
+
+          <!-- Images déjà ajoutées -->
+          <div class="added-images" *ngIf="selectedVoiture.images && selectedVoiture.images.length > 0">
+            <h5>Images ajoutées ({{ selectedVoiture.images.length }}/6) :</h5>
+            <div class="added-images-grid">
+              <div class="added-image-item" *ngFor="let img of selectedVoiture.images; let i = index">
+                <img [src]="img.url" [alt]="img.alt">
+                <button 
+                  type="button" 
+                  class="btn-remove-added" 
+                  (click)="removeImageFromVoiture(i)">
+                  ❌
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn-save">
+            {{ isEditing ? '💾 Modifier' : '➕ Ajouter' }}
+          </button>
+          <button type="button" class="btn-cancel" (click)="closeForm()">
+            ❌ Annuler
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

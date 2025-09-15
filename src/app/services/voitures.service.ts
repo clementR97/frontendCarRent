@@ -4,6 +4,13 @@ import { BehaviorSubject,Observable } from 'rxjs';
 import {tap} from 'rxjs/operators';
 import { ApiUrl } from '../../environments/environment';
 
+export interface VoitureImage{
+    url: string;
+  public_id: string;
+  alt: string;
+  backgroundRemoved?: string;
+  withGrayBackground?: string;
+}
 export interface Voiture{
     _id?:string;
     marque: string;
@@ -11,6 +18,9 @@ export interface Voiture{
     annee: string;
     prixParJour: number;
     disponible: boolean;
+    images?:VoitureImage[];
+    description?:string;
+    caractéristiques?:string[];
 }
 export interface VoituresReponse{
     success: boolean;
