@@ -20,7 +20,7 @@ export interface Voiture{
     disponible: boolean;
     images?:VoitureImage[];
     description?:string;
-    caractéristiques?:string[];
+    caracteristiques?:string[];
 }
 export interface VoituresReponse{
     success: boolean;

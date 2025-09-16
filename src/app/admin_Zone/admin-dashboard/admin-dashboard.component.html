@@ -96,6 +96,47 @@
             Disponible
           </label>
         </div>
+       <div class="form-group">
+        <h3>Caractéristiques:*</h3>
+        <!-- nombres de sieges -->
+        <div class="form-group">
+          <label>nombre de Siege :</label>
+          <select [(ngModel)]="selectedSieges" name="caracteristiques">
+            <option *ngFor="let personne of personnes" [value]="personne.value">
+              {{ personne.name }}
+            </option>
+          </select>
+        </div>
+        <!-- type de motorisation -->
+        <div class="form-group">
+          <label>type de motorisation :</label>
+          <select [(ngModel)]="selectedMotorisation" name="caracteristiques">
+            <option *ngFor="let motor of typeMotorisation" >
+              {{ motor.name }}
+            </option>
+          </select>
+        </div>
+        <!-- type transmission -->
+        <div class="form-group">
+          <label>type de transmission :</label>
+          <select [(ngModel)]="selectedTransmission" name="caracteristiques">
+            <option *ngFor="let transmission of boiteTransmission">
+              {{ transmission.name }}
+            </option>
+          </select>
+        </div>
+       </div>
+        <!-- Ajoutez aussi un champ description -->
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea 
+              id="description" 
+              [(ngModel)]="selectedVoiture.description" 
+              name="description"
+              rows="3"
+              placeholder="Description de la voiture...">
+            </textarea>
+          </div>
 
         <!-- Dans la section IA pour les images -->
         <div class="form-group ai-section">

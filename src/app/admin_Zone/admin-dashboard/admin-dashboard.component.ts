@@ -34,6 +34,16 @@ export class AdminDashboardComponent implements OnInit {
     { name: 'Vert', value: 'green' }
   ];
 
+  // partie caractéristiques des véhicules
+
+  selectedSieges: number = 5;
+  selectedMotorisation: string = 'Essence';
+  selectedTransmission: string = 'Manuelle';
+
+  personnes = [{name:'1',value:1},{name:'2',value:2},{name:'3',value:3},{name:'4',value:4},{name:'5',value:5},{name:'6',value:6},{name:'7',value:7},{name:'8',value:8},{name:'9',value:9},{name:'10',value:10},];
+  typeMotorisation = [{name:'Essence'},{name:'Diesel'},{name:'Hybride'},{name:'Hybride Rechargable'},{name:'Electrique'}];
+  boiteTransmission = [{name:'Manuelle',abrev:'manuel'},{name:'Automatique',abrev:'auto'},{name:'Semi-Automatique',abrev:'semi-auto'}]
+  
   constructor(
     private voitureService: VoitureService,
     private imageAiService: ImageAiService
@@ -62,7 +72,10 @@ export class AdminDashboardComponent implements OnInit {
       annee: '',
       prixParJour: 0,
       disponible: true,
-      images: []
+      images: [],
+      // caracteristiques: [],
+
+      description:''
     };
     this.isEditing = false;
     this.showForm = true;
@@ -122,7 +135,31 @@ export class AdminDashboardComponent implements OnInit {
       });
     }
   }
-
+// Méthodes pour gérer les caractéristiques
+assembleCaracteristique(){
+  if(this.selectedVoiture){
+    this.selectedVoiture.caracteristiques = [
+      `${this.selectedSieges} siege`,
+      this.selectedMotorisation,
+      this.selectedTransmission
+    ];
+  }
+}
+loadCaractéristiquesFromVoiture(voiture:Voiture){
+  if(voiture.caracteristiques && voiture.caracteristiques.length >=3){
+    const siegesMatch = voiture.caracteristiques[0]?.match(/(\d+)/);
+    this.selectedSieges = siegesMatch ? parseInt(siegesMatch[1]):5;
+    this.selectedMotorisation = voiture.caracteristiques[1]||'Essence';
+    this.selectedTransmission = voiture.caracteristiques[1]||'Manuelle'
+  }else{
+    this.resetCaractéristiques();
+  }
+}
+resetCaractéristiques(){
+  this.selectedSieges = 5;
+  this.selectedMotorisation = 'Essence';
+  this.selectedTransmission = 'Manuelle';
+}
   // Fermer le formulaire
   closeForm() {
     this.showForm = false;

@@ -671,3 +671,42 @@
     }
   }
 }
+
+.form-group {
+  h3 {
+    color: #2c3e50;
+    margin: 20px 0 15px 0;
+    font-size: 18px;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 5px;
+  }
+  
+  select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    background: white;
+    
+    &:focus {
+      outline: none;
+      border-color: #3498db;
+    }
+  }
+  
+  textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    resize: vertical;
+    min-height: 80px;
+    
+    &:focus {
+      outline: none;
+      border-color: #3498db;
+    }
+  }
+}
