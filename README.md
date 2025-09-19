@@ -1,62 +1,79 @@
-# FrontRentCar
+# Ebay - Car Rental App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.11.
+![GitHub repo size](https://img.shields.io/github/repo-size/clementR97/frontendCarRent)
+![GitHub stars](https://img.shields.io/github/stars/clementR97/frontendCarRent?style=social)
+![GitHub forks](https://img.shields.io/github/forks/clementR97/frontendCarRent?style=social)
 
-## Development server
+This project is a car rental app consisting of **two parts**:  
 
-To start a local development server, run:
+1. **Frontend** : Angular Application for users on this repository.  
+2. **Backend** : [Node.js API](https://github.com/clementR97/CarLocationBackend.git)Node.js API to manage car data, reservations and users.
 
+---
+
+## Table of contents
+- [Description](#description)  
+- [Technologies used](#technologies-used)  
+- [Installation](#installation)  
+- [Configuration](#configuration)  
+- [Launch the application](#launch-the_application)  
+- [Licence](#licence)  
+
+---
+
+## Description
+
+This application allows:  
+- Browse the catalog of available cars  
+- View the details of each vehicle  
+- Book a car for a given period  
+- Manage your user account (login, registration, profile modification)  
+
+The frontend interacts with the backend via **REST APIs**.
+
+---
+
+## Technologies used
+
+### Frontend
+- Angular  
+- TypeScript  
+- HTML5 / CSS3  
+- Bootstrap  
+- RxJS for data flow management  
+- Angular Router for navigation
+- supabase OAuth 
+
+
+## Installation
+
+1. created a folder and in the folder
+2. Clone the repository frontend:  
 ```bash
-ng serve
+git clone https://github.com/clementR97/frontendCarRent.git
+cd frontendCarRent
 ```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
+3.Install the dependencies for frontend:
 ```bash
-ng generate component component-name
+npm install
 ```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
+## Configuration
+In frontend/src/environments/environment.ts:
 ```bash
-ng generate --help
+export const environment = {
+  production: false,
+  apiUrl: 'http://localhost:3000/api'
+};
 ```
+## Launch the application:
+   ```bash
+   cd frontend
+   ng serve
+   ```
+.Frontend accessible on http://localhost:4200
+.The page automatically reloads when you make changes.
 
-## Building
+## Licence
+Ce projet est sous licence MIT.
 
-To build the project run:
 
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
-# frontendCarRent
-# frontendCarRent
-# frontendCarRent
