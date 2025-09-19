@@ -1,4 +1,4 @@
-# Ebay - Car Rental App
+# Car Rental App
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/clementR97/frontendCarRent)
 ![GitHub stars](https://img.shields.io/github/stars/clementR97/frontendCarRent?style=social)
@@ -6,7 +6,7 @@
 
 This project is a car rental app consisting of **two parts**:  
 
-1. **Frontend** : Angular Application for users on this repository.  
+1. **Frontend** : Angular Application for users and admin on this repository.  
 2. **Backend** : [Node.js API](https://github.com/clementR97/CarLocationBackend.git)Node.js API to manage car data, reservations and users.
 
 ---
