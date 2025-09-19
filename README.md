@@ -28,7 +28,7 @@ This application allows:
 - View the details of each vehicle  
 - Book a car for a given period  
 - Manage your user account (login, registration, profile modification)  
-
+- Admin page
 The frontend interacts with the backend via **REST APIs**.
 
 ---
@@ -60,10 +60,21 @@ npm install
 ## Configuration
 In frontend/src/environments/environment.ts:
 ```bash
-export const environment = {
+export const ApiUrl = {
   production: false,
   apiUrl: 'http://localhost:3000/api'
 };
+```
+for supabase:
+```bash
+export const environment = {
+    production: false,
+    supabase: {
+      url: 'your project supabase url',
+      anonKey:your project supabase annonKey,      
+
+    }
+  };
 ```
 ## Launch the application:
    ```bash
